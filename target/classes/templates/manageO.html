@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <!--  <link rel="stylesheet" href="./assets/css/admin.css">-->
+    <title>Manage Users</title>
+  </head>
+
+  <style>
+    #icon_shop {
+      text-decoration: none;
+      color: #fff !important;
+      font-weight: 600;
+      font-size: 1.25rem;
+      margin-right: 32px;
+    }
+
+    #helloAdmin {
+      color: rgb(0, 255, 55);
+    }
+
+    #nameAdmin {
+      color: rgb(24, 204, 24);
+      font-weight: bold;
+      font-size: 1.4rem;
+    }
+
+    #helloAdmin:hover {
+      cursor: pointer;
+      opacity: 0.8;
+    }
+
+    #option__admin:hover #signOut {
+      display: block;
+    }
+
+    #option__admin {
+      margin-bottom: 0;
+      padding: 0;
+      margin: 12px;
+      list-style: none;
+      text-align: center;
+    }
+
+    #signOut {
+      position: absolute;
+      right: 136px;
+      top: 52px;
+      background-color: #fff;
+      display: none;
+      padding: 0 32px;
+      text-decoration: none;
+    }
+
+    #signOut:hover {
+      color: blue;
+      cursor: pointer;
+      background-color: #ccc;
+    }
+
+    #tableUsers {
+      margin-top: 12px;
+    }
+
+    #btnDel, #btnAcc {
+      margin-left: 12px;
+    }
+  </style>
+
+<body>
+<nav class="navbar navbar-expand-lg bg-dark ">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <a id="icon_shop" >Clothes Shop</a>
+
+      <ul class="effect navbar-nav">
+        <li class="nav-item">
+          <a id="OptionAP" class="nav-link active" aria-current="page" href="/admin/manageProduct">Quản lý sản phẩm</a>
+        </li>
+        <li class="nav-item">
+          <a id="managerUser" class="nav-link" href="/admin/manageUser">Quản lý tài khoản</a>
+        </li>
+        <li class="nav-item">
+          <a id="managerOrder" class="nav-link" href="#">Quản lý đơn hàng</a>
+        </li>
+
+        <li class="nav-item">
+          <a id="managerResponse" class="nav-link" href="/admin/userResponse">Phản hồi khách hàng</a>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <ul id="option__admin">
+        <span id="helloAdmin">Xin chào, <span id="nameAdmin"> admin</span></span>
+        <li><a id="signOut" href="/login">Đăng xuất</a></li>
+      </ul>
+    </div>
+  </div>
+
+</nav>
+
+<!-- Table manage users -->
+<div th:if="${message}" class="alert alert-success text-center">
+  [[${message}]]
+</div>
+
+<table id="tableUsers" class="table table-dark table-hover">
+  <tr style="text-align: center;">
+    <td>#</td>
+    <td>Số điện thoại</td>
+    <td>Địa chỉ giao hàng</td>
+    <td>Giá trị đơn hàng</td>
+    <td>Trạng thái</td>
+    <td>Thao tác</td>
+  </tr>
+  <th:block th:each="u : ${listOrder}">
+    <tr style="text-align: center;">
+      <td>[[${u.id}]]</td>
+      <td>[[${u.phone}]]</td>
+      <td>[[${u.location}]]</td>
+      <td>[[${u.price}]]00đ</td>
+      <td>[[${u.status}]]</td>
+      <td>
+        <a th:href="@{'/admin/manageOrder/detail/' + ${u.ido} + '/' + ${u.price}}" >Chi tiết đơn</a>
+        <a id="btnAcc" th:href="@{'/admin/manageOrder/accept/' + ${u.id}}" >Xác nhận đơn</a>
+        <a id="btnDel" th:href="@{'/admin/manageOrder/delete/' + ${u.id}}" >Xóa</a>
+      </td>
+    </tr>
+  </th:block>
+</table>
+<!-- End table manage users -->
+
+
+</body>
+</html>

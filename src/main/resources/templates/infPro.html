@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <title>Product Info</title>
+</head>
+
+<style>
+  body {
+    background-color: rgb(216, 209, 209);
+  }
+
+  .backgroup_Info {
+    margin-top: 80px;
+    position: absolute;
+    left: 68px;
+    background-color: #fff;
+    height: fit-content;
+    width: 1200px;
+  }
+
+  .content__text {
+    width: calc(60% - 50px);
+    padding: 26px 0 0 26px;
+  }
+
+  #content__img {
+    height: 550px;
+    width: 450px;
+  }
+
+  #nameProduct {
+    font-weight: 500;
+    line-height: 1.5rem;
+    font-size: 1.25rem;
+    word-wrap: break-word;
+  }
+
+  .text-muted {
+    color: orangered !important;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    stroke: #ee4d2d;
+    fill: currentColor;
+  }
+
+  #price {
+    font-size: 1.875rem;
+    font-weight: 500;
+    color: #ee4d2d;
+    background-color: rgb(216, 209, 209);
+    border-radius: 4px;
+    /* width: 100%; */
+  }
+
+  #size {
+    margin-left: 12px;
+  }
+
+  .selled {
+    padding-top: 3px;
+  }
+
+  .border {
+    margin: 5px 16px 0 16px;
+    background-color: rgb(136, 135, 135);
+    height: 20px;
+    width: 2px;
+  }
+
+  #numSel {
+    font-size: 1rem;
+    color: #222;
+    margin-right: 5px;
+    padding-bottom: 1px;
+    font-weight: 500;
+  }
+
+  #daban {
+    font-size: .875rem;
+    color: #767676;
+    text-transform: capitalize;
+  }
+</style>
+
+<body>
+<div class="navbar">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" th:href="@{/shophome}">Clothes shop</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+              aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a th:href="@{/vechungtoi}" class="nav-link">Về chúng tôi</a>
+
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Liên hệ</a>
+
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Giỏ hàng</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+<form action="" method="POST">
+  <th:block >
+<div class="backgroup_Info ">
+  <div class="content d-flex">
+    <img id="content__img" th:src="@{'../' + ${product.image}}" alt="hinh">
+    <div class="content__text d-flex flex-column">
+      <span id="nameProduct">[[${product.name}]]</span>
+      <div class="rating d-flex">
+        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+        <div class="border"></div>
+        <div class="selled"><span id="numSel">708</span> <span id="daban">Đã Bán</span></div>
+      </div>
+      <span id="price">[[${product.price}]]00 đ</span>
+      <span id="description">
+                   [[${product.description}]]
+                </span>
+      <div class="choseSize d-flex my-2">
+        <label for="size"><b>Kích thước</b></label>
+        <select name="size" id="size">
+          <option value="" disabled selected>Chọn size</option>
+          <option value="37">size 37</option>
+          <option value="38">size 38</option>
+          <option value="39">size 39</option>
+          <option value="40">size 40</option>
+          <option value="41">size 41</option>
+          <option value="42">size 42</option>
+          <option value="43">size 43</option>
+        </select>
+      </div>
+      <div class="card-footer">
+        <a th:href="@{'/cart/' + ${product.id}}" class="btn btn-primary">Thêm vào giỏ hàng</a>
+      </div>
+    </div>
+  </div>
+</div>
+  </th:block>
+</form>
+</body>
+
+</html>

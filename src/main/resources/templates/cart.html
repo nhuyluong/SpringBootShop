@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Giỏ hàng</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<style>
+    .total {
+        float: left;
+        font-size: 1.6rem;
+        font-weight: bold;
+        margin-top: 4px;
+    }
+</style>
+<div class="container">
+	<!--
+		th:utext=${usName}: Lấy mail người dùng
+		[[${#request.userPrincipal.principal.fullId}]]: Lấy id người dùng(Xem trong class custom user detail)
+	-->
+    <h2>Giỏ hàng</h2>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td colspan="7">
+                <button onclick="location.href='/shophome'" type="button" class="btn btn-primary">Tiếp tục mua hàng</button>
+            </td>
+        </tr>
+        <tr>
+            <th>Ảnh</th>
+            <th>STT</th>
+            <th>Tên sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Giá</th>
+            <th>Thành tiền</th>
+            <th>Xóa</th>
+        </tr>
+        </thead>
+        <tbody>
+	        <tr th:each="cart, isStat: ${listCart}">
+	            <td><img th:src="@{'../' + ${cart.image}}" alt="Hình ảnh" style="max-height: 50px"></td>
+	            <td>[[${isStat.count}]]</td>
+	            <td>[[${cart.name}]]</td>
+	            <td><input type="text" disabled th:value="${cart.quantity}"></td>
+	            <td><p>[[${cart.price}]]00 đ</p></td>
+	            <td>[[${cart.price}*1.0*${cart.quantity}]]00 đ </td>
+	            <td><a th:href="@{'/cart/delete/'+${cart.id}}"><button type="button" class="btn btn-danger">Xóa</button></a></td>
+	        </tr>
+
+	        
+	        
+	        <tr>
+	            <td colspan="7" style="text-align: right">
+                    <div class="buy d-flex">
+                        <form th:action="@{'/cart/cartDetail'}" method="Get">
+<!--                            <input style="display: none;" type="text" name="idUser" id="idUser" th:value="${id}">-->
+                            <input type="submit" class="btn btn-success" value="Đặt hàng">
+                        </form>
+
+                    </div>
+
+	            </td>
+	        </tr>
+        </tbody>
+    </table>
+   
+    
+</div>
+</body>
+</html>
